@@ -1,0 +1,20 @@
+faiss-cpu
+httpx
+langchain
+langchain-anthropic
+langchain-community
+langchain-core
+langchain-nvidia-ai-endpoints
+langchain-ollama
+langchain-openai
+langchain-text-splitters
+langchain-voyageai
+langchainhub
+langgraph
+ollama
+pydantic
+# pygraphviz
+streamlit
+tavily-python
+tiktoken
+unstructured[all-docs]

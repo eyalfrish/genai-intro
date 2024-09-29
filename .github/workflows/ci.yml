@@ -1,0 +1,39 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ '**' ]  # Trigger on all branches, matching GitLab's behavior
+
+jobs:
+  test-pre-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python --version
+        pip install virtualenv
+        virtualenv .venv
+        source .venv/bin/activate
+        pip install -r dev-requirements.txt
+        pip freeze
+
+    - name: Run pre-commit on all files
+      run: |
+        source .venv/bin/activate
+        pre-commit run --all-files

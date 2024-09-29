@@ -1,0 +1,43 @@
+# This pipeline will be triggered at every push action (not for every commit)
+workflow:
+    rules:
+      # this pipeline will be triggered at every push action
+      - if: $CI_PIPELINE_SOURCE == "push"
+
+# Change pip's cache directory to be inside the project directory since we can
+# only cache local items.
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  GIT_STRATEGY: clone
+  GIT_DEPTH: 0
+
+stages:
+  - test
+
+default:
+  # For jobs that don't need to run through all python versions (e.g. build,
+  # publish) use our "preferred" python version.
+  image: python:3.11
+
+  # see relevant tags for vidcomp_arch groups runners at
+  # https://gitlab-master.nvidia.com/groups/vidcomp_arch/-/runners
+  tags:
+    - executor/docker
+  # for more info: https://docs.gitlab.com/ee/ci/caching/#cache-python-dependencies
+  cache:
+    paths:
+      - ${PIP_CACHE_DIR}
+
+test-pre-commit:
+  stage: test
+  before_script:
+    - python --version
+    - pip install virtualenv
+    - virtualenv .venv
+    - source .venv/bin/activate
+    - pip install -r dev-requirements.txt
+    - pip freeze
+  script:
+    # One would assume we can run pre-commit just on the files that have
+    # changed, but we decided to run it on all files to be sure all is fine!
+    - pre-commit run --all-files

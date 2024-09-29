@@ -1,0 +1,73 @@
+repos:
+  - repo: https://github.com/PyCQA/autoflake
+    rev: v2.3.1
+    hooks:
+      - id: autoflake
+        args: [
+          "--remove-all-unused-imports",
+          "--in-place",
+        ]
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.19.1 # Last version that supports Python 3.8.*
+    hooks:
+      - id: pyupgrade
+        # Version matches minimal supported python version (see setup.py)
+        args: [
+          "--py311-plus",
+          "--keep-percent-format" # We had some issues with formatting of something like '0x%.16x@%s,'
+        ]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: check-added-large-files
+        args: [--maxkb=128]
+      - id: fix-byte-order-marker
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.398
+    hooks:
+      - id: pyright
+        additional_dependencies:
+          [
+            '--upgrade',
+            'faiss-cpu',
+            'httpx',
+            'langchain',
+            'langchain-anthropic',
+            'langchain-community',
+            'langchain-core',
+            'langchain-nvidia-ai-endpoints',
+            'langchain-ollama',
+            'langchain-openai',
+            'langchain-text-splitters',
+            'langchain-voyageai',
+            'langchainhub',
+            'langgraph',
+            'ollama',
+            'pydantic',
+            'streamlit',
+            'tavily-python',
+            'tiktoken',
+            'unstructured[all-docs]',
+          ]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.4
+    hooks:
+      - id: ruff
+        args: [
+          --fix,
+          --ignore,
+          # We allow imports to not be at the top of the file for the sake of
+          # readability of split sections within the example files.
+          E402,
+        ]
+      - id: ruff-format
