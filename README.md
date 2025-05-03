@@ -90,7 +90,7 @@ The scripts support the following inference providers:
 
 #### NVIDIA External (w/ rate limits)
 
-- **Default LLM Model:** `meta/llama-3.1-70b-instruct`
+- **Default LLM Model:** `meta/llama-3.3-70b-instruct`
 - **Default Embedding Model:** `NV-Embed-QA`
 - **Default Vision Model:** `meta/llama-3.2-90b-vision-instruct`
 - **Environment Variable:** `NVIDIA_API_KEY` (required - get [HERE](https://build.nvidia.com/))
