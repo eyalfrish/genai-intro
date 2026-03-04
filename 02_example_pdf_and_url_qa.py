@@ -173,9 +173,11 @@ if user_input:
             [
                 (
                     "system",
-                    "You are a helpful AI assistant named Envie. You will reply to questions only based "
-                    "on the context that you are provided. If something is out of context, you will "
-                    "refrain from replying and politely decline to respond to the user.",
+                    "You are a helpful AI assistant named Envie. You will "
+                    "reply to questions only based on the context that you "
+                    "are provided. If something is out of context, you will "
+                    "refrain from replying and politely decline to respond "
+                    "to the user.",
                 ),
                 (
                     "user",

@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genai-intro"
+version = "0.1.0"
+description = "GenAI with LangChain Examples and Utilities"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "NVIDIA IT Hackathon"}]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "faiss-cpu",
+    "httpx",
+    "langchain",
+    "langchain-anthropic",
+    "langchain-classic",
+    "langchain-community",
+    "langchain-core",
+    "langchain-nvidia-ai-endpoints",
+    "langchain-ollama",
+    "langchain-openai",
+    "langchain-text-splitters",
+    "langchain-voyageai",
+    "langchainhub",
+    "langgraph",
+    "ollama",
+    "pydantic",
+    "streamlit",
+    "tavily-python",
+    "tiktoken",
+    "unstructured[all-docs]",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+    "ruff",
+    "ty",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["models*"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+fix = true
+
+[tool.ruff.lint]
+select = [
+    "F",      # Pyflakes
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "I",      # isort
+    "UP",     # pyupgrade
+]
+ignore = [
+    # Allow imports to not be at the top of the file for the sake of
+    # readability of split sections within the example files.
+    "E402",
+]
+
+[tool.ruff.lint.pycodestyle]
+# E501 reports lines that exceed this length (formatter wraps code to 88)
+max-line-length = 100
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.ty.environment]
+python-version = "3.11"

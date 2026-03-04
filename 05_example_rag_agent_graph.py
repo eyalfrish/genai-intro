@@ -126,11 +126,16 @@ if RUN_EXAMPLE:
 
 retrieval_relevance_grader_prompt = PromptTemplate(
     template="""System: You are a grader assessing relevance
-    of a retrieved document to a user question. If the document contains keywords related to the user question,
-    grade it as relevant. It does not need to be a stringent test. The goal is to filter out erroneous retrievals. \n
-    Give a binary score 'yes' or 'no' score to indicate whether the document is relevant to the question. \n
-    Provide the binary score as a JSON with a single key 'score' and no premable or explanation.
-    User: Here is the retrieved document: \n\n {document} \n\n Here is the user question: {question} \n
+    of a retrieved document to a user question. If the document
+    contains keywords related to the user question, grade it as
+    relevant. It does not need to be a stringent test. The goal
+    is to filter out erroneous retrievals. \n
+    Give a binary score 'yes' or 'no' score to indicate whether
+    the document is relevant to the question. \n
+    Provide the binary score as a JSON with a single key 'score'
+    and no premable or explanation.
+    User: Here is the retrieved document: \n\n {document}
+    \n\n Here is the user question: {question} \n
     """,
     input_variables=["question", "document"],
 )
@@ -152,7 +157,8 @@ if RUN_EXAMPLE:
         if ex_relevance_grade.lower() == "yes":
             ex_relevant_retrieved_docs.append(doc)
     print(
-        f"{len(ex_relevant_retrieved_docs)} out of {len(ex_retrieved_docs)} documents found relevant"
+        f"{len(ex_relevant_retrieved_docs)} out of "
+        f"{len(ex_retrieved_docs)} documents found relevant"
     )
 ###########################
 
@@ -161,9 +167,11 @@ if RUN_EXAMPLE:
 ###################################################
 
 augmented_question_prompt = PromptTemplate(
-    template="""System: You are an assistant for question-answering tasks.
-    Use the following pieces of retrieved context to answer the question. If you don't know the answer,
-    just say that you don't know. Use three sentences maximum and keep the answer concise.
+    template="""System: You are an assistant for question-answering
+    tasks. Use the following pieces of retrieved context to answer
+    the question. If you don't know the answer, just say that you
+    don't know. Use three sentences maximum and keep the answer
+    concise.
     User:
     Question: {question}
     Context: {context}""",
@@ -204,7 +212,8 @@ answer_grounding_grader = (
 if RUN_EXAMPLE:
     print("################# Testing answer Hallucination/Grounding...")
     print(
-        "NOTE: Using relevant_retrieved_docs rather than web_doc due to all web_docs being too large."
+        "NOTE: Using relevant_retrieved_docs rather than web_doc "
+        "due to all web_docs being too large."
     )
     ex_answer_grounding_grader_answer = answer_grounding_grader.invoke(
         {"documents": ex_relevant_retrieved_docs, "generation": ex_generated_answer}
@@ -401,7 +410,7 @@ def web_search_node(state: RagStateTotal) -> RagState:
     question, documents = state["question"], state["remaining_documents"]
 
     # Web search
-    web_search_results = web_search_tool.invoke({"query": question})
+    web_search_results = web_search_tool.invoke({"query": question})  # type: ignore[missing-typed-dict-key, invalid-key]
     web_search_results_flattened_content = "\n".join(
         [web_search_result["content"] for web_search_result in web_search_results]
     )
@@ -525,7 +534,7 @@ def grade_generated_answer_vs_docs_and_question_cond_edge(
 ###################################################################################
 
 # Define the graph's state
-rag_flow = StateGraph(RagState)
+rag_flow = StateGraph(RagStateTotal)  # type: ignore[invalid-argument-type]  # ty doesn't resolve TypedDict as StateLike
 
 # Define the nodes
 rag_flow.add_node("web_search_node", web_search_node)
@@ -574,7 +583,6 @@ rag_flow.add_conditional_edges(
 ###################################################################################
 
 rag_app = rag_flow.compile()
-# rag_app.get_graph().draw_png("rag_graph.png")
 
 rag_output = rag_app.invoke(
     {

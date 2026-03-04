@@ -17,7 +17,7 @@ class OpenAIModelProvider(ModelProvider):
 
     @staticmethod
     def _get_llm_instance(model_name: str, **kwargs: Any) -> BaseChatModel:
-        return ChatOpenAI(model_name=model_name, **kwargs)  # type: ignore[call-arg]
+        return ChatOpenAI(model=model_name, **kwargs)  # type: ignore[unknown-argument]  # ty doesn't resolve Pydantic __init__ fields
 
     @staticmethod
     def _get_embedder_instance(model_name: str, **kwargs: Any) -> Embeddings:
@@ -27,7 +27,7 @@ class OpenAIModelProvider(ModelProvider):
 
     @staticmethod
     def _get_vision_instance(model_name: str, **kwargs: Any) -> BaseChatModel:
-        return ChatOpenAI(model_name=model_name, **kwargs)  # type: ignore[call-arg]
+        return ChatOpenAI(model=model_name, **kwargs)  # type: ignore[unknown-argument]  # ty doesn't resolve Pydantic __init__ fields
 
     @staticmethod
     def _get_default_llm_model_name() -> str:
