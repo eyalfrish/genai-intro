@@ -5,8 +5,8 @@ import json
 from pathlib import Path
 from typing import Any, Literal, TypedDict
 
-from langchain import globals as lc_globals
-from langchain.chains import TransformChain
+from langchain_core.globals import set_debug
+from langchain_classic.chains import TransformChain
 from langchain_core.messages import HumanMessage
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.runnables import chain
@@ -184,7 +184,7 @@ if __name__ == "__main__":
 
     args = parse_args()
     if args.debug:
-        lc_globals.set_debug(True)
+        set_debug(True)
     PROVIDER_CLASS = ProviderFactory.get_provider(args.inference_provider)
     PROVIDER_CLASS.initialize_provider()
 

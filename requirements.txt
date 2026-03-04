@@ -2,6 +2,7 @@ faiss-cpu
 httpx
 langchain
 langchain-anthropic
+langchain-classic
 langchain-community
 langchain-core
 langchain-nvidia-ai-endpoints

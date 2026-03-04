@@ -138,8 +138,8 @@ else:
 # Component #4 - LLM Response Generation and Chat
 ############################################
 
-from langchain.chains import ConversationChain
-from langchain.chains.conversation.memory import ConversationBufferMemory
+from langchain_classic.chains import ConversationChain
+from langchain_classic.memory import ConversationBufferMemory
 
 st.subheader("Chat with your AI Assistant, Envie!")
 
