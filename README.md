@@ -99,9 +99,9 @@ The scripts support the following inference providers:
 
 #### Steps to Obtain NVIDIA API Key
 
-1. **Log in to [NVIDIA NGC](https://ngc.nvidia.com/) with your NVIDIA credentials.**
-2. **Select your NVIDIA organization (choose 'NV-Developer').**
-3. **Click on your account -> Setup -> Generate Personal Key -> +Generate Personal Key.**
+1. **Sign-in to [NVIDIA NGC](https://ngc.nvidia.com/signin).**
+2. **Go to the [API Keys Page](https://org.ngc.nvidia.com/setup/api-keys).**
+3. **Choose Generate Personal Key.**
 4. **Name the key.**
 5. **Set the expiration date.**
 6. **Set Service Included to 'Cloud Functions'.**
