@@ -36,7 +36,7 @@ class NvidiaModelProvider(ModelProvider):
 
     @staticmethod
     def _get_default_embedder_model_name() -> str:
-        return "NV-Embed-QA"
+        return "nvidia/nv-embedqa-e5-v5"
 
     @staticmethod
     def _get_default_vision_model_name() -> str:
