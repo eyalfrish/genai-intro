@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/PyCQA/autoflake
-    rev: v2.3.1
+    rev: v2.3.3
     hooks:
       - id: autoflake
         args: [
@@ -9,7 +9,7 @@ repos:
         ]
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.19.1 # Last version that supports Python 3.8.*
+    rev: v3.21.2
     hooks:
       - id: pyupgrade
         # Version matches minimal supported python version (see setup.py)
@@ -19,7 +19,7 @@ repos:
         ]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: check-added-large-files
@@ -32,7 +32,7 @@ repos:
       - id: mixed-line-ending
 
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.400
+    rev: v1.1.408
     hooks:
       - id: pyright
         additional_dependencies:
@@ -42,6 +42,7 @@ repos:
             'httpx',
             'langchain',
             'langchain-anthropic',
+            'langchain-classic',
             'langchain-community',
             'langchain-core',
             'langchain-nvidia-ai-endpoints',
@@ -60,9 +61,9 @@ repos:
           ]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.8
+    rev: v0.15.4
     hooks:
-      - id: ruff
+      - id: ruff-check
         args: [
           --fix,
           --ignore,

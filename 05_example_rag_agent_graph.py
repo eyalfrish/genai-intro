@@ -394,7 +394,7 @@ def web_search_node(state: RagStateTotal) -> RagState:
     """
     Web search based on the question
     Expected state.question and state.remaining_documents
-    Updates state.remaining_documents
+    Updates state.remaining_documents and state.do_web_search
     """
     print("---WEB SEARCH---")
     # TODO: Remove remaining_documents?
@@ -407,7 +407,10 @@ def web_search_node(state: RagStateTotal) -> RagState:
     )
     web_results = Document(page_content=web_search_results_flattened_content)
 
-    return {"remaining_documents": documents + [web_results]}
+    return {
+        "remaining_documents": documents + [web_results],
+        "do_web_search": True,  # Mark that we performed a web search (for final state)
+    }
 
 
 ###################################################################################
