@@ -198,8 +198,8 @@ if user_input := st.chat_input("Can you tell me what NVIDIA is known for?"):
                 ),
                 (
                     "user",
-                    "Here is the retrieved document: \n\n {document} \n\nHere is the user "
-                    "question: {question}\n",
+                    "Here is the retrieved document: \n\n {document} "
+                    "\n\nHere is the user question: {question}\n",
                 ),
             ]
         )
@@ -240,8 +240,9 @@ if user_input := st.chat_input("Can you tell me what NVIDIA is known for?"):
                     ),
                     (
                         "user",
-                        "Here are the facts:\n ------- \n{documents}\n ------- \nHere is the "
-                        "answer: {generation}",
+                        "Here are the facts:\n ------- \n"
+                        "{documents}\n ------- \n"
+                        "Here is the answer: {generation}",
                     ),
                 ]
             )

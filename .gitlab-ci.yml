@@ -35,7 +35,7 @@ test-pre-commit:
     - pip install virtualenv
     - virtualenv .venv
     - source .venv/bin/activate
-    - pip install -r dev-requirements.txt
+    - pip install -e .[dev]
     - pip freeze
   script:
     # One would assume we can run pre-commit just on the files that have

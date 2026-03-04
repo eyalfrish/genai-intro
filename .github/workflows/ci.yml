@@ -30,7 +30,7 @@ jobs:
         pip install virtualenv
         virtualenv .venv
         source .venv/bin/activate
-        pip install -r dev-requirements.txt
+        pip install -e .[dev]
         pip freeze
 
     - name: Run pre-commit on all files

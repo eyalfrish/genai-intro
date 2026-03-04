@@ -19,13 +19,15 @@ It's encouraged to use a virtual environment to manage dependencies.
 
     ```bash
     python -m venv .venv
-    source .venv/bin/activate  # On Windows: .venv\Scripts\activate.bat
+    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+    source .venv/bin/activate  # On Windows PowerShell: .venv\Scripts\activate
+                               # On Windows cmd.exe: .venv\Scripts\activate.bat
     ```
 
-2. Install the required packages:
+2. Install the project with all dependencies (including dev tools):
 
     ```bash
-    pip install -r requirements.txt -r dev-requirements.txt
+    pip install -e .[dev]
     ```
 
 ## Overview of Scripts
